@@ -20,7 +20,7 @@ input[type="url"] {
   border: 2px solid #0952A9;
 }
 
-input[type="submit"] {
+button {
   font-size: 15px;
   background: #0952A9;
   color: white;

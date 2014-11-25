@@ -3,14 +3,17 @@ package controllers;
 import models.UrlMapping;
 import play.data.DynamicForm;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.main;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class Kurzen extends Controller {
 
 	public static Result index() {
-		return ok(main.render(null, null));
+		return ok(main.render());
 	}
 
 	public static Result create() {
@@ -26,7 +29,10 @@ public class Kurzen extends Controller {
 
 		String shortenedUrl = request().host() + "/" + mapping.getShortened();
 
-		return ok(main.render(url, shortenedUrl));
+		ObjectNode result = Json.newObject();
+		result.put("url", shortenedUrl);
+
+		return ok(result);
 	}
 
 	public static Result redirectWith(String key) {

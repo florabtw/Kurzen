@@ -1,20 +1,18 @@
-@(original: String, shortened: String)
 <!DOCTYPE html>
 <html>
     <head>
         <title>Kurzen</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/main.js")"></script>
     </head>
     <body>
       <div class="container">
         <h1>Kurz.in your URLs!</h1>
-        <form action="/" method="post">
-          <input type="url" name="url" value="@original" />
-          <input type="submit" value="Kurzen" />
+        <form class="url-form">
+          <input type="url" name="url" />
+          <button type="button" onclick="kurzen()">Kurzen</button>
         </form>
-        @if(shortened) {
-        <span class="result">@shortened</span>
-        }
       </div>
     </body>
 </html>
