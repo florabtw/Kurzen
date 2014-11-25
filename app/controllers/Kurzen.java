@@ -10,7 +10,7 @@ import views.html.main;
 public class Kurzen extends Controller {
 
 	public static Result index() {
-		return ok(main.render(null));
+		return ok(main.render(null, null));
 	}
 
 	public static Result create() {
@@ -26,7 +26,7 @@ public class Kurzen extends Controller {
 
 		String shortenedUrl = request().host() + "/" + mapping.getShortened();
 
-		return ok(main.render(shortenedUrl));
+		return ok(main.render(url, shortenedUrl));
 	}
 
 	public static Result redirectWith(String key) {
