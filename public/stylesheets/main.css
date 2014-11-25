@@ -27,6 +27,7 @@ input[type="submit"] {
   padding: 6px;
   font-size: 18px;
   border: none;
+  cursor: pointer;
 }
 
 h1 {
@@ -42,7 +43,10 @@ h1 {
   text-align: center;
 }
 
-.pure-form .pure-g {
-  width: 300px;
-  margin: 0 auto;
+.result {
+  border-bottom: 1px solid #0952A9;
+  color: #0952A9;
+  display: inline-block;
+  font-size: 25px;
+  margin: 20px 0 0;
 }

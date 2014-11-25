@@ -12,6 +12,9 @@
           <input type="url" name="url" />
           <input type="submit" value="Kurzen" />
         </form>
+        @if(shortened) {
+        <span class="result">@shortened</span>
+        }
       </div>
     </body>
 </html>
