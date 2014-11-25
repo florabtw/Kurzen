@@ -28,4 +28,14 @@ public class Kurzen extends Controller {
 
 		return ok(main.render(shortenedUrl));
 	}
+
+	public static Result redirectWith(String key) {
+		UrlMapping mapping = UrlMapping.getByShortenedUrl(key);
+
+		if (mapping == null) {
+			return redirect(routes.Kurzen.index());
+		} else {
+			return redirect(mapping.getOriginal());
+		}
+	}
 }

@@ -19,6 +19,10 @@ public class UrlMapping extends Model {
 		return find.where().eq("original", url).findUnique();
 	}
 
+	public static UrlMapping getByShortenedUrl(String key) {
+		return null;
+	}
+
 	@Id
 	private int id;
 
