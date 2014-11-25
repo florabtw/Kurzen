@@ -20,7 +20,7 @@ public class UrlMapping extends Model {
 	}
 
 	public static UrlMapping getByShortenedUrl(String key) {
-		return null;
+		return find.where().eq("shortened", key).findUnique();
 	}
 
 	@Id
@@ -50,6 +50,7 @@ public class UrlMapping extends Model {
 	public String getShortened() {
 		if (shortened == null && id != 0) {
 			shortened = Base62Encoder.encode(id);
+			update();
 		}
 
 		return shortened;
