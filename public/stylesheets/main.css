@@ -50,3 +50,8 @@ h1 {
   font-size: 25px;
   margin: 20px 0 0;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}

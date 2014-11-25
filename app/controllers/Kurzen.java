@@ -39,6 +39,7 @@ public class Kurzen extends Controller {
 		UrlMapping mapping = UrlMapping.getByShortenedUrl(key);
 
 		if (mapping == null) {
+			flash("error", "Shortened URL not found!");
 			return redirect(routes.Kurzen.index());
 		} else {
 			return redirect(mapping.getOriginal());

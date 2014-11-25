@@ -8,6 +8,12 @@
     </head>
     <body>
       <div class="container">
+        @if(flash.get("error")) {
+        <span class="error">
+          @flash.get("error")
+        </span>
+        }
+
         <h1>Kurz.in your URLs!</h1>
         <form class="url-form">
           <input type="url" name="url" />
