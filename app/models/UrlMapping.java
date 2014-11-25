@@ -1,5 +1,7 @@
 package models;
 
+import helpers.Base62Encoder;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,8 +16,7 @@ public class UrlMapping extends Model {
 			String.class, UrlMapping.class);
 
 	public static UrlMapping getByOriginalUrl(String url) {
-		// TODO implement
-		return null;
+		return find.where().eq("original", url).findUnique();
 	}
 
 	@Id
@@ -43,6 +44,10 @@ public class UrlMapping extends Model {
 	}
 
 	public String getShortened() {
+		if (shortened == null && id != 0) {
+			shortened = Base62Encoder.encode(id);
+		}
+
 		return shortened;
 	}
 

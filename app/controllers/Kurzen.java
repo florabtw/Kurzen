@@ -24,9 +24,12 @@ public class Kurzen extends Controller {
 			mapping.save();
 		}
 
-		String shortenedUrl = mapping.getShortened();
+		String shortened = mapping.getShortened();
 
-		return ok(main.render(shortenedUrl));
+		// TODO prepend root domain to shortened url
+		// localhost for dev
+		// kurz.in (or something) for production
+		return ok(main.render(shortened));
 	}
 
 }
