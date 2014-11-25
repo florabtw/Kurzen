@@ -13,6 +13,11 @@ public class UrlMapping extends Model {
 	public static Finder<String, UrlMapping> find = new Finder<String, UrlMapping>(
 			String.class, UrlMapping.class);
 
+	public static UrlMapping getByOriginalUrl(String url) {
+		// TODO implement
+		return null;
+	}
+
 	@Id
 	private int id;
 
@@ -25,9 +30,8 @@ public class UrlMapping extends Model {
 	public UrlMapping() {
 	}
 
-	public UrlMapping(String original, String shortened) {
+	public UrlMapping(String original) {
 		this.original = original;
-		this.shortened = shortened;
 	}
 
 	public String getOriginal() {

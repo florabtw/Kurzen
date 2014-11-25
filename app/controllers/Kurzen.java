@@ -1,5 +1,6 @@
 package controllers;
 
+import models.UrlMapping;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -15,7 +16,17 @@ public class Kurzen extends Controller {
 	public static Result create() {
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String url = requestData.get("url");
-		return ok(url);
+
+		UrlMapping mapping = UrlMapping.getByOriginalUrl(url);
+
+		if (mapping == null) {
+			mapping = new UrlMapping(url);
+			mapping.save();
+		}
+
+		String shortenedUrl = mapping.getShortened();
+
+		return ok(main.render(shortenedUrl));
 	}
 
 }
