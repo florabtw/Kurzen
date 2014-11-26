@@ -1,6 +1,9 @@
 package controllers;
 
 import models.UrlMapping;
+
+import org.apache.commons.validator.routines.UrlValidator;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -12,6 +15,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Kurzen extends Controller {
 
+	private static UrlValidator validator = new UrlValidator();
+
 	public static Result index() {
 		return ok(main.render());
 	}
@@ -19,6 +24,10 @@ public class Kurzen extends Controller {
 	public static Result create() {
 		DynamicForm requestData = Form.form().bindFromRequest();
 		String url = requestData.get("url");
+
+		if (!validator.isValid(url)) {
+			return badRequest("Not a valid URL!");
+		}
 
 		UrlMapping mapping = UrlMapping.getByOriginalUrl(url);
 

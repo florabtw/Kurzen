@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+
+libraryDependencies += "commons-validator" % "commons-validator" % "1.4.0"

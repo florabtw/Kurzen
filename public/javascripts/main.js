@@ -1,16 +1,30 @@
 $(document).ready(function() {
     /* Submit form when user presses Enter */
-    $('form input,url').keypress(function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
+    $('form input,url').keypress(function(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
             kurzen();
         }
     });
 });
 
+function clearErrors() {
+  $('.error').each(function(i, val) {
+    val.remove();
+  });
+}
+
 function kurzen() {
+  clearErrors();
+
   var data = $('.url-form').serialize();
-  $.post('/', data, submitSuccess);
+  $.ajax({
+    url: '/',
+    type: 'post',
+    data: data,
+    success: submitSuccess,
+    error: submitError
+  });
 }
 
 function submitSuccess(data) {
@@ -22,4 +36,11 @@ function submitSuccess(data) {
 
     $('.container').append(url);
   }
+}
+
+function submitError(req, stat, msg) {
+  var error = $('<div/>')
+                .addClass('error')
+                .text(req.responseText);
+  $('form').append(error);
 }
