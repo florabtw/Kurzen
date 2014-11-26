@@ -15,48 +15,48 @@ public class UrlMapping extends Model {
 	public static Finder<String, UrlMapping> find = new Finder<String, UrlMapping>(
 			String.class, UrlMapping.class);
 
-	public static UrlMapping getByOriginalUrl(String url) {
-		return find.where().eq("original", url).findUnique();
+	public static UrlMapping reverseLookup(String url) {
+		return find.where().eq("url", url).findUnique();
 	}
 
-	public static UrlMapping getByShortenedUrl(String key) {
-		return find.where().eq("shortened", key).findUnique();
+	public static UrlMapping lookup(String key) {
+		return find.where().eq("key", key).findUnique();
 	}
 
 	@Id
 	private int id;
 
 	@Column(unique = true)
-	private String original;
+	private String key;
 
 	@Column(unique = true)
-	private String shortened;
+	private String url;
 
 	public UrlMapping() {
 	}
 
-	public UrlMapping(String original) {
-		this.original = original;
+	public UrlMapping(String url) {
+		this.url = url;
 	}
 
-	public String getOriginal() {
-		return original;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setOriginal(String original) {
-		this.original = original;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public String getShortened() {
-		if (shortened == null && id != 0) {
-			shortened = Base62Encoder.encode(id);
+	public String getKey() {
+		if (key == null && id != 0) {
+			key = Base62Encoder.encode(id);
 			update();
 		}
 
-		return shortened;
+		return key;
 	}
 
-	public void setShortened(String shortened) {
-		this.shortened = shortened;
+	public void setKey(String key) {
+		this.key = key;
 	}
 }

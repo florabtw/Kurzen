@@ -29,14 +29,14 @@ public class Kurzen extends Controller {
 			return badRequest("Not a valid URL!");
 		}
 
-		UrlMapping mapping = UrlMapping.getByOriginalUrl(url);
+		UrlMapping mapping = UrlMapping.reverseLookup(url);
 
 		if (mapping == null) {
 			mapping = new UrlMapping(url);
 			mapping.save();
 		}
 
-		String shortenedUrl = request().host() + "/" + mapping.getShortened();
+		String shortenedUrl = request().host() + "/" + mapping.getKey();
 
 		ObjectNode result = Json.newObject();
 		result.put("url", shortenedUrl);
@@ -45,13 +45,13 @@ public class Kurzen extends Controller {
 	}
 
 	public static Result redirectWith(String key) {
-		UrlMapping mapping = UrlMapping.getByShortenedUrl(key);
+		UrlMapping mapping = UrlMapping.lookup(key);
 
 		if (mapping == null) {
 			flash("error", "Shortened URL not found!");
 			return redirect(routes.Kurzen.index());
 		} else {
-			return redirect(mapping.getOriginal());
+			return redirect(mapping.getUrl());
 		}
 	}
 }

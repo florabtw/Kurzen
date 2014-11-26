@@ -5,10 +5,10 @@
 
 create table url_mapping (
   id                        integer not null,
-  original                  varchar(255),
-  shortened                 varchar(255),
-  constraint uq_url_mapping_original unique (original),
-  constraint uq_url_mapping_shortened unique (shortened),
+  key                       varchar(255),
+  url                       varchar(255),
+  constraint uq_url_mapping_key unique (key),
+  constraint uq_url_mapping_url unique (url),
   constraint pk_url_mapping primary key (id))
 ;
 
